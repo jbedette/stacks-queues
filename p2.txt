@@ -1,0 +1,26 @@
+program 2
+
+main #include "stack.h" #include "queue.h", if you're feeling brave;
+
+stack
+    push
+    pop 
+    peep
+    display
+    is empty
+    is full
+
+client                  adt
+
+enqueue             ->  queue
+repeat until done           |
+                            v
+            |  segment <- dequeue
+            v 
+                 ->     push
+                        until done
+                        pop
+display          <-     until done
+
+
+
