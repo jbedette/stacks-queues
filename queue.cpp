@@ -16,28 +16,27 @@ int queue::dequeue(int & data, char name[]){
     //doesn't totally destroy LL
     node * out = rear->next;
     if(out == rear){
-        cerr << "====out = rear";
         data = out->data->dist;
         strcpy(name,out->data->name);
         delete rear->data->name;
         delete rear->data;
         delete rear;
         rear = NULL;
+    }else{
+        data = out->data->dist;
+        strcpy(name,out->data->name);
+        rear->next = out->next;
+        delete out->data->name;
+        delete out->data;
+        delete out;
+        out->next = NULL;
+        out = NULL;
     }
-    data = out->data->dist;
-    strcpy(name,out->data->name);
-    rear->next = out->next;
-    delete out->data->name;
-    delete out->data;
-    delete out;
-    out->next = NULL;
-    out = NULL;
     return 0;
 }
 
 //member functions
 int queue::enqueue(int data, char name[]){
-    cerr << "\nEnque\n";
     //fi-fo
     int flag = 0;
     if(!rear){
@@ -62,7 +61,6 @@ int queue::enqueue(int data, char name[]){
 //testing
     
 int queue::display(){
-    cerr << "\ndisp: " << rear;
     int flag = 0;
     if(!rear){
         cerr << "\n--------!rear\n";

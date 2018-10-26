@@ -3,8 +3,15 @@
 int main(){
     client myClient;
     myClient.init();
-    cout << "\n>Would you like to build your journey?\n";
-    if(confirm()) myClient.addSeg();
+    myClient.addSeg();
+    myClient.addSeg();
+    myClient.addSeg();
+    myClient.addSeg();
+    myClient.addSeg();
+    myClient.addSeg();
+    myClient.queToStack();
+    myClient.stackPop();
+
 
 
 

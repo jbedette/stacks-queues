@@ -66,7 +66,9 @@ class client{
         client();
         ~client();
         int init();
-        void addSeg();
+        int addSeg();
+        int queToStack();
+        int stackPop();
     private:
         int count;
         queue *  myQue;

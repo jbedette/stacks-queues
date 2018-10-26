@@ -30,9 +30,7 @@ int stack::init(){
 int stack::push(int data, char name[]){
     int flag = 0;
     if(!head){
-        if(init()){//should initialize head
-            cerr << "->push to empty arr";
-            cerr << head->data[top].dist;
+        if(init()){
             head->data[top].dist = data;
             copyTo(head->data[top].name,name);
             ++top;
@@ -40,20 +38,16 @@ int stack::push(int data, char name[]){
         }
     }
     else if(topMod5(top)){
-        cerr << "creating new node";
         node * temp = head;
         head = new node;
         head->next = temp;
         head->data = new segment[6];
         copyTo(head->data[0].name,name);
         head->data[0].dist = data;
-        cerr << "\nNext Name: " << head->next->data[0].name << '\n';
-        cerr << "Next Data: " << head->next->data[0].dist <<'\n';
         top = 1;
         ++flag;
     }
     else{
-        cerr << "pushing to arr[" << top << "]\n";
         head->data[top].dist = data;
         copyTo(head->data[top].name,name);
         ++top;
@@ -65,18 +59,15 @@ int stack::pop(node * & head, int & data, char name[]){
     int flag = 0;
     if(!head) return flag;
     else if(--top <= 0){
-        cerr << "\ntop: "<< top << "arr pop" << '\n';
         node * temp = head->next; 
         data = head->data[top].dist;
         strcpy(name, head->data[top].name);
-        delete head->data[top].name;
         delete head->data[top].name;
         delete head->data;
         delete head;
         head = temp;
         top = 5;
     }else{
-        cerr << "\ntop: "<< top << "reg pop" << '\n';
         data = head->data[top].dist;
         strcpy(name, head->data[top].name);//make client arr big
         delete head->data[top].name;
@@ -95,10 +86,8 @@ int stack::peek(int & data, char name[]){
 
 
 int stack::display(node * head){
-    //cerr << "--->display recur\n";
     int flag = 0;
     if(!head){
-        cerr << "\n--->display !head\n";
         return flag;
     }
     for(int i = 0; i < 5; ++i){
