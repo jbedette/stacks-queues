@@ -34,6 +34,7 @@ int client::queToStack(){
     //myQue->display();
     for (int i = 0; i < count; ++i){
         myQue->dequeue(dist,out);
+        cout << "\nStep #" << i+1;
         cout << "\nTitle: " << out;
         cout << "\nDistance: " << dist << " meters\n";
         myStack->push(dist,out);
@@ -43,10 +44,29 @@ int client::queToStack(){
 int client::stackPop(){
     char out[100];
     int dist = 0;
-    for (int i = 0; i < count; ++i){
+    for (int i = 0; i < count; --count){
         myStack->pop(dist,out);
+        cout << "\nStep #" << count;
         cout << "\nTitle: " << out;
         cout << "\nDistance: " << dist << " meters\n";
     }
     return 0;
 }
+int client::peek(int opt){
+    char out[100];
+    int dist = 0;
+    if(opt){
+        myStack->peek(dist, out);
+        cout << "\nStack";
+    }
+    else{
+        myQue->peek(dist,out);
+        cout << "\nQueue";
+    }
+    cout << " peek:\nTitle: " << out << "\nDistance: ";
+    cout << dist << " meters";
+    return 0;
+}
+
+
+

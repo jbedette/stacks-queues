@@ -13,7 +13,6 @@ int queue::dequeue(int & data, char name[]){
     //if only rear, destroy lll
     //else save rear->n->n
     //cour really shrink this with recursion
-    //doesn't totally destroy LL
     node * out = rear->next;
     if(out == rear){
         data = out->data->dist;
@@ -57,6 +56,11 @@ int queue::enqueue(int data, char name[]){
         ++flag;
     }
     return flag;
+}
+int queue::peek(int & data, char name[]){
+    data = rear->next->data->dist;
+    strcpy(name,rear->next->data->name);
+    return 0;
 }
 //testing
     
