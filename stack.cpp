@@ -12,7 +12,7 @@ stack::~stack(){
 //wrappers
 int stack::display(){
     cerr << "--->display wrapper\n";
-    return display(head, 0);
+    return display(head);
 }
 int stack::pop(int & data,char name[]){return pop(head,data,name);}
 //
@@ -22,6 +22,7 @@ int stack::init(){
     int flag = 0;
     if(!head){
         head = new node;
+        head->data = new segment[6];
         head->next = NULL;
         ++flag;
     }
@@ -30,32 +31,33 @@ int stack::init(){
 int stack::push(int data, char name[]){
     int flag = 0;
     if(!head){
-        /*
-        cerr << "\nPush init head\n";
-        head = new node;
-        head->next = NULL;
-        head->data = data;
-        copyTo(head->name,name);
-        ++flag;
-        */
-        ///*
         if(init()){//should initialize head
-            head->data = data;
-            copyTo(head->name,name);
+            head->data[top].dist = data;
+            copyTo(head->data[top].name,name);
+            ++top;
             ++flag;
         }
-        //*/
+    }
+    else if(topMod5(top)){
+        node * temp = new node;
+        temp->next = head;
+        temp->data[0].dist = data;
+        copyTo(head->data[0].name,name);
+        top = 1;
+        ++flag;
     }
     else{
         node * temp = new node;//do I need to delete this? 10-17, No;
-        temp->data = data;
-        copyTo(temp->name,name);
+        temp->data[top].dist = data;
+        copyTo(temp->data[top].name,name);
         temp->next = head;
         head = temp;
+        ++top;
         ++flag;
     }
     return flag;
 };
+/*
 int stack::pop(node * & head, int & data, char name[]){
     cerr << "--->pop:\n";
     int flag = 0;
@@ -77,19 +79,22 @@ int stack::pop(node * & head, int & data, char name[]){
     ++flag;
     return flag;
 }
+*/
 int stack::peek(){return 0;}
-int stack::display(node * head, int i){
+
+
+int stack::display(node * head){
     cerr << "--->display recur\n";
     int flag = 0;
     if(!head){
-        cerr << "--->display !head\n";
+        cerr << "\n--->display !head\n";
         return flag;
     }
-    cout << "\nName: " << head->name << '\n';
-    cout << "Data: " << head->data <<'\n';
-    cout << "Count: " << i <<'\n';
-    ++i;
+    for(int i = 0; i < 5; ++i){
+        cout << "\nName: " << head->data[i].name << '\n';
+        cout << "Data: " << head->data[i].dist <<'\n';
+    }
     ++flag;
-    display(head->next,i);
+    display(head->next);
     return flag;
 }

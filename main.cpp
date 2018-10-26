@@ -24,6 +24,7 @@ int main(){
     myStack.display();
     cerr << "\n\n";
     cerr << "-->post display 1\n";
+    /*
     myStack.pop(test4,test5);
     cerr << "-->post pop1\n\n" << test4 << ':' << test5 << '\n';
     cerr << "\n\n";
@@ -31,6 +32,7 @@ int main(){
     cerr << "-->post pop2\n\n" << test4 << ':' << test5 << '\n';
     cerr << "\n\n";
     myStack.display();
+    */
 
     return 0;
 }

@@ -11,4 +11,7 @@ void charGet(char in[]){
     cin.clear();
     cin.ignore(50,'\n');
 }
+bool topMod5(int top){
+    return (top % 5 == 0) ? true : false;
+}
     

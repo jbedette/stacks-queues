@@ -10,11 +10,15 @@ using namespace std;
 //utility
 int copyTo(char * & out, char in[]);
 void charGet(char in[]);
+bool topMod5(int top);
 //structs
+struct segment{
+    char * name;
+    int dist;
+};
 struct node{
     node * next;
-    int data;
-    char * name;
+    segment * data;
 };
 //classes
 class stack{
@@ -31,10 +35,10 @@ class stack{
         int peek();
         int isEmpty(); int isFull();
         //testing
-        int display(node * head, int i);
+        int display(node * head);
     private:
         node * head;
-        int top;
+        int top = 0;
 };
 class queue{
     public:
