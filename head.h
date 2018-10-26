@@ -20,6 +20,7 @@ using namespace std;
 //      - definitely could have slimmed down the enque, push, pop
 //      - my display's are kinda bad
 //      - client program could be better
+//8 destructors
 
 //utility
 int copyTo(char * & out, char in[]);
@@ -49,7 +50,6 @@ class stack{
         int init();
         int push(int data, char name[]);
         int peek(int & data, char name[]);
-        //testing
     private:
         int display(node * head);
         int pop(node * & head, int & data, char name[]);
@@ -66,9 +66,15 @@ class queue{
         int display();
         int enqueue(int data, char name[]);
         int peek(int & data, char name[]);
+        int addHomeDest(char home[], char dest[]);  //adds a home and dest
+                                                    //for trip
+        int dispHomeDest(int opt);  //opt determines home or dest displayed
+                                    //opt 0 displays home, 1 is dest
     private:
         int dequeue(node * & rear, int & data, char name[]);
         node * rear;
+        char * home;
+        char * dest;
 };
 class client{
     public:
@@ -80,6 +86,7 @@ class client{
         int queToStack();
         int stackPop();
         int peek(int opt);//opt determines peek at stack(1) or queue(0)
+        int addDest();
     private:
         int count;
         queue *  myQue;

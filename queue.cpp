@@ -3,9 +3,13 @@
 
 queue::queue(){
     rear = NULL;
+    home = NULL;
+    dest = NULL;
     cerr << "\nConstructing\n";
 }
 queue::~queue(){
+    delete home;
+    delete dest;
     cerr << "\nDeconstructing\n";
 }
 //wrappers
@@ -32,6 +36,13 @@ int queue::dequeue(int & data, char name[]){
         out = NULL;
     }
     return 0;
+}
+int queue::dispHomeDest(int opt){
+    int flag = 0;
+    if(home && dest) ++flag;
+    if(opt)cout << dest;
+    else cout << home;
+    return flag;
 }
 
 //member functions
@@ -80,6 +91,13 @@ int queue::display(){
     cout << "\ndist: " << current->data->dist << '\n';
     }
     return flag;
+}
+int queue::addHomeDest(char hIn[], char dIn[]){
+    home = new char[strlen(hIn)+1];
+    strcpy(home,hIn);
+    dest = new char[strlen(dIn)+1];
+    strcpy(dest,dIn);
+    return 0;
 }
 
 

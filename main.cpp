@@ -3,6 +3,7 @@
 int main(){
     client myClient;
     myClient.init();
+    myClient.addDest();
     myClient.addSeg();
     myClient.addSeg();
     myClient.addSeg();
