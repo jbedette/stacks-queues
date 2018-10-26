@@ -2,69 +2,81 @@
 
 
 queue::queue(){
+    rear = NULL;
     cerr << "\nConstructing\n";
-    head = NULL;
-    tail = NULL;
 }
 queue::~queue(){
     cerr << "\nDeconstructing\n";
 }
-int init(){//do we want init?
-    int flag = 0; 
-    head = NULL;
-    tail = head;
-    tail->next = head;
-    head->next = tail;
-    if (!head) ++flag;//if head has been set to NULL return true?
-    return flag;
-}
 //wrappers
-int queue::enqueue(int data, char name[]){ enqueue(head,data,name);}
-int queue::dequeue(int & data, char name[]){ dequeue(head,data,name);}
-int queue::display(){ display(head);}
+int queue::dequeue(int & data, char name[]){
+    //if only rear, destroy lll
+    //else save rear->n->n
+    //cour really shrink this with recursion
+    //doesn't totally destroy LL
+    node * out = rear->next;
+    if(out == rear){
+        cerr << "====out = rear";
+        data = out->data->dist;
+        strcpy(name,out->data->name);
+        delete rear->data->name;
+        delete rear->data;
+        delete rear;
+        rear = NULL;
+    }
+    data = out->data->dist;
+    strcpy(name,out->data->name);
+    rear->next = out->next;
+    delete out->data->name;
+    delete out->data;
+    delete out;
+    out->next = NULL;
+    out = NULL;
+    return 0;
+}
 
-//delicous recursive member functions
-int queue::enqueue(node * head,int data, char name[]){//needs to recursive, add to end;
+//member functions
+int queue::enqueue(int data, char name[]){
+    cerr << "\nEnque\n";
+    //fi-fo
     int flag = 0;
-    if(!head){
-       head = new node; 
-       copyTo(head->name, name);
-       head->data = data;
-       tail = head;
-       head->next = tail;
-       tail->next = head;
-       ++flag;
+    if(!rear){
+        rear = new node;
+        rear->data = new segment;
+        rear->next = rear;
+        copyTo(rear->data->name, name);
+        rear->data->dist = data;
+        ++flag;
     }else{
-        node * temp = new node;
-        copyTo(temp->name,name);
-        temp->data = data;
-        temp->next = head;
-        if(head!=tail)tail->next = temp;
-        tail = temp;
+        node * temp = rear;
+        rear = new node;
+        rear->data = new segment;
+        copyTo(rear->data->name, name);
+        rear->data->dist = data;
+        rear->next = temp->next;
+        temp->next = rear;
         ++flag;
     }
     return flag;
 }
-int queue::dequeue(node * & head, int & data, char name[]){
-    int flag = 0;
-    if(!head) return flag;
-    data = head->data;
-    strcpy(name,head->name);
-    else{//what happens when head==tail
-        node * temp = head->next;
-        delete head->name;
-        delete head;
-        head = temp;
-        ++flag;
-    }
-    return flag;
-}
-int queue::peek(){}
-bool queue::isEmpty(){}
-bool queue::isFull(){}
 //testing
-int queue::display(node * head){
+    
+int queue::display(){
+    cerr << "\ndisp: " << rear;
     int flag = 0;
+    if(!rear){
+        cerr << "\n--------!rear\n";
+        return 0;
+    }
+    node * current = rear;
+    current = current->next;
+    cout << "\nname: " << current->data->name << '\n';
+    cout << "\ndist: " << current->data->dist << '\n';
+    while(current != rear){
+    current = current->next;
+    cout << "\nname: " << current->data->name << '\n';
+    cout << "\ndist: " << current->data->dist << '\n';
+    }
     return flag;
 }
 

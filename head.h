@@ -7,14 +7,20 @@ using namespace std;
 //display is running off the end of the array
 //pop isn't reassinging head correctly
 
+
 //utility
 int copyTo(char * & out, char in[]);
 void charGet(char in[]);
 bool topMod5(int top);
+bool confirm();
+
+//client
+void addSeg(int & dist, char name[]);
+
 //structs
 struct segment{
-    char * name;
-    int dist;
+    char * name = NULL;
+    int dist = 0;
 };
 struct node{
     node * next;
@@ -32,33 +38,39 @@ class stack{
         int init();
         int push(int data, char name[]);
         int pop(node * & head, int & data, char name[]);
-        int peek();
+        int peek(int & data, char name[]);
         int isEmpty(); int isFull();
         //testing
         int display(node * head);
     private:
         node * head;
-        int top = 0;
+        int top;
 };
 class queue{
     public:
         queue();
         ~queue();
-        int init();
         //wrappers
         int display();
         int dequeue(int & data, char name[]);
         int enqueue(int data, char name[]);
         //
-        int enqueue(node * head,int data, char name[]);
-        int dequeue(node * & head, int & data, char name[]);
+        int dequeue(node * & rear, int & data, char name[]);
         int peek();
         bool isEmpty(); bool isFull();
-        //peek
-        int display(node * head);
     private:
-        node * head;
-        node * tail;
+        node * rear;
+};
+class client{
+    public:
+        client();
+        ~client();
+        int init();
+        void addSeg();
+    private:
+        int count;
+        queue *  myQue;
+        stack * myStack;
 };
 
 

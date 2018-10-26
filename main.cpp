@@ -1,38 +1,88 @@
 #include "head.h"
 
 int main(){
-    stack myStack; 
-    //push test
-    char term1[10];
-    char term2[10];
-    char term3[10];
-    
-    //pop test
-    int test4 = 0;
-    char test5[50];
+    client myClient;
+    myClient.init();
+    cout << "\n>Would you like to build your journey?\n";
+    if(confirm()) myClient.addSeg();
 
+
+
+
+
+        /*
+        //push test
+        char term1[10];
+        char term2[10];
+    char term3[10];
     cout << "\nterm1: ";
     charGet(term1);
     cout << "\nterm2: ";
     charGet(term2);
     cout << "\nterm3: ";
     charGet(term3);
-    myStack.display();// ----> testing display before init
+    myQue.enqueue(1,term1);
+    myQue.enqueue(2,term2);
+    myQue.enqueue(3,term3);
+    myQue.display();
+    // queue output testing
+    int test1 = 0;
+    char test2[10];
+    int test3 = 0;
+    char test4[10];
+    int test5 = 0;
+    char test6[10];
+    myQue.dequeue(test1,test2);
+    myQue.dequeue(test3,test4);
+    myQue.dequeue(test5,test6);
+    cerr << "\n" << test1 << ':' << test2;
+    cerr << "\n" << test3 << ':' << test4;
+    cerr << "\n" << test5 << ':' << test6;
+    myQue.display();
+    */
+    /*
+    //push test
+    char term1[10];
+    char term2[10];
+    char term3[10];
+    cout << "\nterm1: ";
+    charGet(term1);
+    cout << "\nterm2: ";
+    charGet(term2);
+    cout << "\nterm3: ";
+    charGet(term3);
     myStack.push(1,term1);
     myStack.push(2,term2);
     myStack.push(3,term3);
-    myStack.display();
-    cerr << "\n\n";
-    cerr << "-->post display 1\n";
-    /*
-    myStack.pop(test4,test5);
-    cerr << "-->post pop1\n\n" << test4 << ':' << test5 << '\n';
-    cerr << "\n\n";
-    myStack.pop(test4,test5);
-    cerr << "-->post pop2\n\n" << test4 << ':' << test5 << '\n';
-    cerr << "\n\n";
+    //stack array test section
+    char term4[10];
+    char term5[10];
+    char term6[10];
+    cout << "\nterm4: ";
+    charGet(term4);
+    cout << "\nterm5: ";
+    charGet(term5);
+    cout << "\nterm6: ";
+    charGet(term6);
+    myStack.push(4,term4);
+    myStack.push(5,term5);
+    myStack.push(6,term6);
+    //array pop test
+    int test1 = 0;
+    char test2[10];
+    int test3 = 0;
+    char test4[10];
+    myStack.pop(test1,test2);
+    cerr <<"\nPop " <<test1 << ':' << test2 << '\n';
+    myStack.pop(test3,test4);
+    cerr <<"\nPop " <<test3 << ':' << test4 << '\n';
+    //peek test
+    int test5 = 0;
+    char test6[10];
+    myStack.peek(test5,test6);
+    cerr <<"\npeek " <<test5 << ':' << test6 << '\n';
     myStack.display();
     */
-
     return 0;
 }
+
