@@ -28,16 +28,25 @@ int client::addDest(){
     myQue->addHomeDest(home,dest);
     return 0;
 }
+int client::addMeth(){
+    char method[100];
+    cout << "\n>What method of travel is this?\n";
+    cin.get(method,99,'\n');
+    cin.clear();
+    cin.ignore(100,'\n');
+    myQue->addMeth(method);
+    return 0;
+};
 
 int client::addSeg(){
     char name[100];
-    int dist = 0;
+    float dist = 0;
     cout << "\n>Travel Segment #" << count +1;
     cout << "\n>What's the name of your travel segment?: ";
     cin.get(name,99,'\n');
     cin.clear();
     cin.ignore(100,'\n');
-    cout << "\n>How many meters away is that?: ";
+    cout << "\n>How many miles away is that?: ";
     cin >> dist;
     cin.clear();
     cin.ignore(15,'\n');
@@ -47,14 +56,15 @@ int client::addSeg(){
 }
 int client::queToStack(){
     char out[100];
-    int dist = 0;
+    float dist = 0;
     myQue->display();
     cout << "\nLeaving from: "<<myQue->dispHomeDest(0);
+    myQue->dispMeth();
     for (int i = 0; i < count; ++i){
         myQue->dequeue(dist,out);
         cout << "\nStep #" << i+1;
         cout << "\nTitle: " << out;
-        cout << "\nDistance: " << dist << " meters\n";
+        cout << "\nDistance: " << dist << " miles\n";
         myStack->push(dist,out);
     }
     cout << "\nArriving at: " <<myQue->dispHomeDest(1);
@@ -62,20 +72,20 @@ int client::queToStack(){
 }
 int client::stackPop(){
     char out[100];
-    int dist = 0;
+    float dist = 0;
     cout << "\nLeaving from: "<<myQue->dispHomeDest(1);
     for (int i = 0; i < count; --count){
         myStack->pop(dist,out);
         cout << "\nStep #" << count;
         cout << "\nTitle: " << out;
-        cout << "\nDistance: " << dist << " meters\n";
+        cout << "\nDistance: " << dist << " miles\n";
     }
     cout << "\nArriving at: " <<myQue->dispHomeDest(0);
     return 0;
 }
 int client::peek(int opt){
     char out[100];
-    int dist = 0;
+    float dist = 0;
     if(opt){
         myStack->peek(dist, out);
         cout << "\nStack";
@@ -85,7 +95,7 @@ int client::peek(int opt){
         cout << "\nQueue";
     }
     cout << " peek:\nTitle: " << out << "\nDistance: ";
-    cout << dist << " meters";
+    cout << dist << " miles";
     return 0;
 }
 

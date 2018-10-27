@@ -4,6 +4,7 @@ int main(){
     client myClient;
     myClient.init();
     myClient.addDest();
+    myClient.addMeth();
     myClient.addSeg();
     myClient.addSeg();
     myClient.addSeg();
@@ -18,6 +19,7 @@ int main(){
         myClient.peek(1);
         myClient.stackPop();
     }
+    coutt << "\n\nGoodbye\n\n";
 
     return 0;
 }

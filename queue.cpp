@@ -5,18 +5,14 @@ queue::queue(){
     rear = NULL;
     home = NULL;
     dest = NULL;
-    cerr << "\nConstructing\n";
 }
 queue::~queue(){
     delete home;
     delete dest;
-    cerr << "\nDeconstructing\n";
+    delete method;
 }
 //wrappers
-int queue::dequeue(int & data, char name[]){
-    //if only rear, destroy lll
-    //else save rear->n->n
-    //cour really shrink this with recursion
+int queue::dequeue(float & data, char name[]){
     node * out = rear->next;
     if(out == rear){
         data = out->data->dist;
@@ -39,28 +35,29 @@ int queue::dequeue(int & data, char name[]){
 }
 int queue::dispHomeDest(int opt){
     int flag = 0;
-    if(home && dest) ++flag;
     if(opt)cout << dest;
     else cout << home;
     return flag;
 }
 
 //member functions
-int queue::enqueue(int data, char name[]){
+int queue::enqueue(float data, char name[]){
     //fi-fo
     int flag = 0;
     if(!rear){
         rear = new node;
         rear->data = new segment;
         rear->next = rear;
-        copyTo(rear->data->name, name);
+        rear->data->name = new char[strlen(name)+1];
+        strcpy(rear->data->name,name);
         rear->data->dist = data;
         ++flag;
     }else{
         node * temp = rear;
         rear = new node;
         rear->data = new segment;
-        copyTo(rear->data->name, name);
+        rear->data->name = new char[strlen(name)+1];
+        strcpy(rear->data->name,name);
         rear->data->dist = data;
         rear->next = temp->next;
         temp->next = rear;
@@ -68,9 +65,18 @@ int queue::enqueue(int data, char name[]){
     }
     return flag;
 }
-int queue::peek(int & data, char name[]){
+int queue::peek(float & data, char name[]){
     data = rear->next->data->dist;
     strcpy(name,rear->next->data->name);
+    return 0;
+}
+int queue::addMeth(char meth[]){
+    method = new char[strlen(meth)+1];
+    strcpy(method,meth);
+    return 0;
+}
+int queue::dispMeth(){
+    cout << "\n>The method of transportation is: " << method;
     return 0;
 }
 //testing

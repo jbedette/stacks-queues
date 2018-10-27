@@ -1,0 +1,31 @@
+John Bedette
+10/26/18
+cs163, project 2 write up
+
+    I'm feeling positive about this project. I finally feel like some key concepts about classes have finally clicked.
+The concept of what should be private and how those members are accessable really crystallized. But on to the review.
+
+    I thought the stack was very well suited to this application. It made sense when popping it back out. Same with 
+the concept of queue. Worked very well for setting an itinerary. Both made with linked lists so as to accommodate 
+a wide variety of instructions. What didn't make sense was the use of circular linked list. It really only
+served as training. It offered nothing that linear linked list could not and was needlessly complex. Not that was
+mind numbingly difficult, but it added a layer of unnessary frustration.
+
+    I think that probably a simple array being over written for each trip would probably be the best option. 
+of course a trip's instructions could theorhetically be infinite, but in practical usage it wouldn't really be an issue.
+Barring a simple array, I would have gone with a flexible lll-array combo for both queue and stack. Mostly because I like it.
+The applications that this could possibly have at logical extremes, flexible LLL is probably the best suited.
+
+    My most efficient design was my seperate node structures being easily adaptable for both the CLL and the flexible LLL. I was also
+proud of how my adt's self cleared all allocated memory. A new low score of 0 memory leaks for me. I'm feeling good.
+
+    Where I really didn't do well, was consolidating code. I struggled seeing the places where my redundancies could be removed.
+Often when I did remove them, I broke a key part of my code. This was especially true with my queue. 
+    Also I struggled to use all of the returns of my functions. I ran into an issue where using the return values to send errors would 
+result in some serious and troublesome bugs. Specifically, when I utilized return values, my read in functions would all fire at once
+leaving the user with 4 or 5 prompts and only one space to enter an answer.
+
+    If I had more time, I would make it so I utilized every function's return to serve errors to the user/client. I started out
+with that intention, but as the project grew in size I lost track of where erverything was going. Next time
+I will be more vigilant.
+

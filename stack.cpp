@@ -3,15 +3,13 @@
 stack::stack(){
     head = NULL;
     top = 0;
-    cerr << "\nConstructing\n\n";
 }
 stack::~stack(){
-    cerr << "\nDeconstructing\n\n";
 }
 
 //wrappers
 int stack::display(){return display(head);}
-int stack::pop(int & data,char name[]){return pop(head,data,name);}
+int stack::pop(float & data,char name[]){return pop(head,data,name);}
 //
 
 int stack::init(){
@@ -27,12 +25,13 @@ int stack::init(){
 }
 
 //I could totally shrink this and just have one new node creation path
-int stack::push(int data, char name[]){
+int stack::push(float data, char name[]){
     int flag = 0;
     if(!head){
         if(init()){
             head->data[top].dist = data;
-            copyTo(head->data[top].name,name);
+            head->data[top].name = new char[strlen(name)+1];
+            strcpy(head->data[top].name,name);
             ++top;
             ++flag;
         }
@@ -42,20 +41,22 @@ int stack::push(int data, char name[]){
         head = new node;
         head->next = temp;
         head->data = new segment[6];
-        copyTo(head->data[0].name,name);
+        head->data[0].name = new char[strlen(name)+1];
+        strcpy(head->data[0].name,name);
         head->data[0].dist = data;
         top = 1;
         ++flag;
     }
     else{
         head->data[top].dist = data;
-        copyTo(head->data[top].name,name);
+        head->data[top].name = new char[strlen(name)+1];
+        strcpy(head->data[top].name,name);
         ++top;
         ++flag;
     }
     return flag;
 };
-int stack::pop(node * & head, int & data, char name[]){
+int stack::pop(node * & head, float & data, char name[]){
     int flag = 0;
     if(!head) return flag;
     else if(--top <= 0){
@@ -76,7 +77,7 @@ int stack::pop(node * & head, int & data, char name[]){
     return flag;
 }
 
-int stack::peek(int & data, char name[]){
+int stack::peek(float & data, char name[]){
     if(!head)return 0;
     segment temp = head->data[top-1]; 
     strcpy(name,temp.name);
@@ -92,7 +93,7 @@ int stack::display(node * head){
     }
     for(int i = 0; i < 5; ++i){
         char * outText = head->data[i].name;
-        int outNum = head->data[i].dist;
+        float outNum = head->data[i].dist;
         if(outNum && outText){
             cout << "\nName: " << head->data[i].name << '\n';
             cout << "Data: " << head->data[i].dist <<'\n';
